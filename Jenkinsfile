@@ -50,6 +50,7 @@ pipeline {
             }
         }
 
+
         stage('Copy Project') {
             steps {
                 echo "======================================"
@@ -62,6 +63,7 @@ pipeline {
                     echo "Jenkins Workspace:"
                     echo "${WORKSPACE}"
 
+                    echo ""
                     echo "Deployment Directory:"
                     echo "${PROJECT_DIR}"
 
@@ -69,8 +71,12 @@ pipeline {
 
                     sudo mkdir -p "${PROJECT_DIR}"
 
-                    # Copy project without deleting existing files
-                    sudo cp -r "${WORKSPACE}/." "{PROJECT_DIR}/"
+                    # Copy complete Jenkins workspace
+                    # WITHOUT deleting existing files
+                    sudo cp -r "${WORKSPACE}/." "${PROJECT_DIR}/"
+
+                    # Allow Jenkins to update the deployment files
+                    sudo chown -R jenkins:jenkins "${PROJECT_DIR}"
 
                     echo ""
                     echo "Project copied successfully."
@@ -78,7 +84,7 @@ pipeline {
                     echo ""
                     echo "===== Project Files ====="
 
-                    sudo ls -la "${PROJECT_DIR}"
+                    ls -la "${PROJECT_DIR}"
                 '''
             }
         }
