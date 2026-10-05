@@ -1,0 +1,10 @@
+.env
+.env.production
+node_modules
+dist
+.git
+.gitignore
+README.md
+backend/__pycache__
+__pycache__
+*.pyc
