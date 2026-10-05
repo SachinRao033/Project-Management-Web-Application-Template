@@ -70,7 +70,7 @@ pipeline {
                     sudo mkdir -p "${PROJECT_DIR}"
 
                     # Copy project without deleting existing files
-                    sudo cp -r "WORKSPACE/.""{PROJECT_DIR}/"
+                    sudo cp -r "${WORKSPACE}/." "{PROJECT_DIR}/"
 
                     echo ""
                     echo "Project copied successfully."
